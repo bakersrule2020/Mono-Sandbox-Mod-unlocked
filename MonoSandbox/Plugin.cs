@@ -8,12 +8,10 @@ using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
-using Utilla;
 
 namespace MonoSandbox
 {
-    [ModdedGamemode, Description("HauntedModMenu")]
-    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
+    
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
@@ -239,33 +237,13 @@ namespace MonoSandbox
                 couchManager.IsEditing = false;
                 hammerManager.editMode = false;
                 grenadeManager.editMode = false;
+                InRoom = true;
             }
 
         }
 
-        [ModdedGamemodeJoin]
-        public void OnJoin(string gamemode)
-        {
-            InRoom = true;
-
-            foreach (Transform child in _itemsContainer.transform)
-            {
-                child.gameObject.SetActive(true);
-            }
-        }
-
-        [ModdedGamemodeLeave]
-        public void OnLeave(string gamemode)
-        {
-            InRoom = false;
-
-            foreach (Transform child in _itemsContainer.transform)
-            {
-                child.gameObject.SetActive(false);
-            }
-
-            _list.SetActive(false);
-        }
+        
+        
 
         public void Update()
         {
